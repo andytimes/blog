@@ -1,0 +1,35 @@
+language: node_js
+node_js: stable
+
+branches:
+  only:
+  - master
+
+cache:
+  directories:
+    - node_modules
+    - themes
+
+before_install:
+- openssl aes-256-cbc -K $encrypted_a9a057ac7852_key -iv $encrypted_a9a057ac7852_iv
+  -in .travis/travis.key.enc -out ~/.ssh/id_rsa -d
+- chmod 600 ~/.ssh/id_rsa
+- git config --global user.name "Andy Deng"
+- git config --global user.email "theandy.deng@gmail.com"
+
+install:
+- npm i -g hexo-cli
+- npm i
+- if [[ ! -d "themes/next" ]]; then git clone https://github.com/andytimes/hexo-theme-next.git themes/next;
+  else cd themes/next && git pull && cd -; fi
+
+script:
+- hexo clean
+- hexo g
+- hexo d
+
+addons:
+  ssh_known_hosts:
+    - github.com
+    - git.coding.net
+    - git.dev.tencent.com

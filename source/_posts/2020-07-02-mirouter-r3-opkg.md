@@ -10,7 +10,7 @@ tags:
 
 <!--more-->
 
-出于稳定性和功能完善度考虑，这里我选择第二种方式。要在官方固件使用opkg，第一步肯定是开启ssh了，我的路由器固件版本是开发版2.27.120，按照[官方教程](https://d.miwifi.com/rom/ssh) 或者尝试 openwrt官网给出的[步骤](https://openwrt.org/toh/xiaomi/mir3#get_sshdropbear_access) ，解开ssh之后，查看内核版本为 2.6.36，CPU为 MT7620A (MIPS 24KEc)，根据 /etc/opkg.conf 里面的内容，固件可能是基于 openwrt 12.09 定制的。从谷歌检索了一下，发现了这篇文章：[[小米路由3安装opkg](https://www.ywlib.com/archives/102.html)](https://www.ywlib.com/archives/102.html) ，文章内用到的源是 openwrt 14.07 的，尝试一下发现 openssh-keygen 生成 edcsa 类型密钥的时候 coredump 了，把源替换成 15.05.1 能完美运行。以下是一些详细步骤：
+出于稳定性和功能完善度考虑，这里我选择第二种方式。要在官方固件使用 opkg，第一步肯定是开启 ssh 了，我的路由器固件版本是开发版2.27.120，按照 [官方教程](https://d.miwifi.com/rom/ssh) 或者尝试 openwrt官网给出的 [步骤](https://openwrt.org/toh/xiaomi/mir3#get_sshdropbear_access) ，解开ssh之后，查看内核版本为 2.6.36，CPU为 MT7620A (MIPS 24KEc)，根据 /etc/opkg.conf 里面的内容，固件可能是基于 openwrt 12.09 定制的。从谷歌检索了一下，发现了这篇文章：[[小米路由3安装opkg](https://www.ywlib.com/archives/102.html)](https://www.ywlib.com/archives/102.html) ，文章内用到的源是 openwrt 14.07 的，尝试一下发现 openssh-keygen 生成 ecdsa 类型密钥的时候 coredump 了，把源替换成 15.05.1 能完美运行。以下是一些详细步骤：
 
 - 首先从[这个链接](https://archive.openwrt.org/chaos_calmer/15.05.1/ramips/mt7620/packages/base/opkg_9c97d5ecd795709c8584e972bfdf3aee3a5b846d-9_ramips_24kec.ipk) 获取到 opkg 的二进制文件，修改 /etc/opkg.conf 为以下内容：
 

@@ -47,3 +47,14 @@ markdown:
 
 pretty_urls:
   trailing_index: false
+
+deploy:
+  type: git
+  repo:
+      github: git@github.com:andytimes/blog.git
+      coding: git@git.coding.net:andytime/blog.git
+  branch:
+      github: gh-pages
+      coding: master
+  message: Update site to latest
+

@@ -20,12 +20,9 @@ before_install:
 install:
 - npm i -g hexo-cli
 - npm i
-- if [[ ! -d "themes/next" ]]; then git clone https://github.com/andytimes/hexo-theme-next.git themes/next;
-  else cd themes/next && git pull && cd -; fi
 
 script:
-- hexo clean
-- hexo g
+- npm run build
 - hexo d
 
 addons:

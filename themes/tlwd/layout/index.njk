@@ -1,0 +1,15 @@
+<main class="space-y-16">
+  {% for post in page.posts.toArray() %}
+    {{ partial('_partial/article', { post: post, index: true }) | safe }}
+  {% endfor %}
+</main>
+
+{% if page.total > 1 %}
+  <nav class="paginator">
+    {{ paginator({
+      prev_text: '上一页',
+      next_text: '下一页',
+      escape: false
+    }) | safe }}
+  </nav>
+{% endif %}

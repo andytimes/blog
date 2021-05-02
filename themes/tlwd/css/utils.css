@@ -1,0 +1,23 @@
+.scrollbar-dark {
+  scrollbar-color: dark;
+
+  &::-webkit-scrollbar {
+    @apply w-3;
+
+    &-thumb {
+      @apply bg-gray-600 bg-opacity-50;
+
+      &:hover {
+        @apply bg-opacity-75;
+      }
+
+      &:active {
+        @apply bg-opacity-100;
+      }
+    }
+  }
+}
+
+.table-responsive {
+  @apply max-w-full overflow-auto;
+}

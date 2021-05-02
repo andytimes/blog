@@ -1,0 +1,147 @@
+.article-container {
+  --stripe-size: 2px;
+  --stripe-width: 5rem;
+  --stripe-height: 4rem;
+  --stripe-outset: 1rem;
+}
+
+.article-header {
+  @apply relative;
+
+  &::before {
+    @apply absolute pointer-events-none top-0 left-0;
+
+    content: '';
+    border-width: var(--stripe-size) 0 0 var(--stripe-size);
+    width: var(--stripe-width);
+    height: var(--stripe-height);
+    border-image-source: radial-gradient(farthest-corner at 0 0, theme('colors.accent'), transparent);
+    border-image-slice: 1;
+    border-image-outset: var(--stripe-outset);
+  }
+}
+
+.article-footer {
+  @apply relative pt-6 flex justify-end;
+
+  &::before {
+    @apply absolute pointer-events-none bottom-0 right-0;
+
+    content: '';
+    border-width: 0 var(--stripe-size) var(--stripe-size) 0;
+    width: var(--stripe-width);
+    height: var(--stripe-height);
+    border-image-source: radial-gradient(farthest-corner at 100% 100%, theme('colors.accent'), transparent);
+    border-image-slice: 1;
+    border-image-outset: var(--stripe-outset);
+  }
+}
+
+.article-body {
+  @apply leading-relaxed;
+
+  > * {
+    @apply my-6;
+  }
+
+  h1 {
+    @apply text-3xl font-light;
+  }
+
+  h2 {
+    @apply text-2xl font-normal;
+  }
+
+  h3 {
+    @apply text-xl font-bold;
+  }
+
+  h4 {
+    @apply text-lg font-bold;
+  }
+
+  h5, h6 {
+    @apply font-bold;
+  }
+
+  a {
+    @apply text-accent;
+
+    &:hover {
+      @apply underline;
+    }
+  }
+
+  :not(pre) > code {
+    @apply text-accent;
+  }
+
+  ul, ol {
+    @apply pl-8;
+  }
+
+  ul {
+    @apply list-disc;
+  }
+
+  ol {
+    @apply list-decimal;
+  }
+
+  strong {
+    @apply font-bold;
+  }
+
+  em {
+    @apply italic;
+  }
+
+  figcaption {
+    @apply text-sm py-2 text-center;
+  }
+
+  .video-container {
+    @apply relative pb-9/16;
+
+    > * {
+      @apply absolute inset-0 w-full h-full;
+    }
+  }
+
+  picture {
+    @apply flex justify-center;
+  }
+
+  table {
+    @apply table-auto;
+
+    th, td {
+      @apply px-4 py-2;
+    }
+
+    th {
+      @apply text-left;
+    }
+
+    td {
+      @apply border-t border-gray-600;
+    }
+  }
+
+  blockquote {
+    @apply pl-4 border-solid border-l-2 border-accent;
+
+    > * {
+      @apply my-6;
+    }
+  }
+}
+
+/* Fix .table in tailwind.css override the display attribute */
+.token.table {
+  display: inline;
+}
+
+.utterances {
+  @apply pt-8;
+}

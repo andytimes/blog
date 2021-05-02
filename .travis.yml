@@ -28,5 +28,3 @@ script:
 addons:
   ssh_known_hosts:
     - github.com
-    - git.coding.net
-    - git.dev.tencent.com

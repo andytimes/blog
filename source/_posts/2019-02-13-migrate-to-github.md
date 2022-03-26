@@ -14,7 +14,7 @@ Github Pages 提供的服务并不如 Coding Pages 那么全面，不过够用�
 
 ~~网上搜索到了一篇关于用 Travis-CI 部署 hexo 博客的文章，写的挺不错的： [使用 Travis CI 自动部署 Hexo 博客](https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/)~~
 
-上面提到的博客已挂，多数步骤可以在互联网上搜索到，其中为 Travis-CI 提供部署秘钥可以参阅 [官方文档](https://docs.travis-ci.com/user/encrypting-files/)
+2022-03-27: 上面的博客已挂，Travis-CI 目前已收费，建议使用 GitHub Action，相关教程网上也有很多。
 
 依照上述步骤，顺利的完成了迁移工作，下面是博客和博客主题的源码：
 

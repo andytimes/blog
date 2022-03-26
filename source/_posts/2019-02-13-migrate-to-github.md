@@ -1,6 +1,7 @@
 ---
 title: 迁移到 Github
 date: 2019-02-13 20:45:06
+updated: 2022-03-27 02:33:39
 tags:
   - hexo
 ---
@@ -11,7 +12,9 @@ tags:
 
 Github Pages 提供的服务并不如 Coding Pages 那么全面，不过够用即可，利用 Travis-CI 可以让日后的博客的部署工作更加便利。比如，在 Github 上在线编辑一份 markdown 格式的文章，Travis-CI 便会在 commit 后生成对应的静态网页文件，省去了手动生成再部署的步骤。
 
-网上搜索到了一篇关于用 Travis-CI 部署 hexo 博客的文章，写的挺不错的： [使用 Travis CI 自动部署 Hexo 博客](https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/)
+~~网上搜索到了一篇关于用 Travis-CI 部署 hexo 博客的文章，写的挺不错的： [使用 Travis CI 自动部署 Hexo 博客](https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/)~~
+
+上面提到的博客已挂，多数步骤可以在互联网上搜索到，其中为 Travis-CI 提供部署秘钥可以参阅 [官方文档](https://docs.travis-ci.com/user/encrypting-files/)
 
 依照上述步骤，顺利的完成了迁移工作，下面是博客和博客主题的源码：
 

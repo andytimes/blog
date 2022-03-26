@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Memory-copy</title>
+  
+  
+  <link href="https://andytimes.xyz/atom.xml" rel="self"/>
+  
+  <link href="https://andytimes.xyz/"/>
+  <updated>2022-03-26T20:42:57.386Z</updated>
+  <id>https://andytimes.xyz/</id>
+  
+  <author>
+    <name>Andy Deng</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>在 VMware 中运行物理机的 Linux，多启动的一次尝试</title>
+    <link href="https://andytimes.xyz/blog/2021/05/02/physical-linux-os-runs-in-vmware/"/>
+    <id>https://andytimes.xyz/blog/2021/05/02/physical-linux-os-runs-in-vmware/</id>
+    <published>2021-05-02T15:17:21.000Z</published>
+    <updated>2022-03-26T20:42:57.386Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近开发多在 Windows 上进行，硬盘上的另一个操作系统 Fedora 就很久没启动过了。但有时又难免要用到 Fedora 里面自行编译的程序和定制的脚本，关机进到 Fedora 里跑一遍显得过于麻烦。恰好那时听到基友用 HyperV 把自己的 ArchLinux 做成了多启动，既可以在需要 GPU 的时候进入真机，又可以在别的场景下从 Windows 环境操作 HyperV 启动的 ArchLinux，这样可以完美解决以上的问题。</p><span id="more"></span><p>但是，鉴于微软的 HyperV 没有对 Linux 提供良好的图形驱动支持，加上还有各种奇葩问题存在（看 Windows 自身的状况就可知…），我怎么可能用 HyperV 呢。网上搜索一番心目中 Windows 最强软件 VMware 的多启动案例之后，发现它果然可以做到多启动，之前没有用好这个功能确实是惭愧。V2EX 一位大神在<a href="https://v2ex.com/t/636570">一篇主题-3楼</a>下提供了这样的思路：在 VMware 中创建好引导分区（efi 和 boot），用分区Label的方式引导物理机上 Linux 所在分区的系统即可。这给我带来了很大的启发。又得益于 VMware 把 Linux 下用于增强虚拟机体验的 VMware Tools（用于自由缩放，图形驱动，剪贴板共享等）开源为 <a href="https://github.com/vmware/open-vm-tools">open-vm-tools</a> 项目，多数 Linux 发行版已经预装了相关软件包（没有在包管理中自行安装即可），所以虚拟化后的体验很好。</p><p>整个虚拟化的流程很简单：</p><ol><li>准备好和物理机 Linux 尽量一致 LiveCD，在 VMware 中用 “自定义(高级)” 选项新建虚拟机</li><li>新建的虚拟机重点是两块磁盘：<br>a. 新建一块虚拟磁盘用于建立 EFI （默认为 BIOS 启动，在创建虚拟机后，修改虚拟机的固件类型为 UEFI）和 boot 分区<br>b. 将物理磁盘的根分区连接到虚拟机</li><li>用 LiveCD 建立好 efi 和 boot 分区（需要掌握 chroot 和 UEFI环境安装 grub）</li><li>改写 fstab，用 Label 方式引导系统，我会把自己的 fstab 放在文末供参考</li></ol><p>由于我的物理机没有将 boot 分区独立，新增进 fstab 引导 VMware boot 分区的条目，会导致真机启动失败，需要加上超时参数 x-systemd.device-timeout=3s （3秒后超时）在真机启动时跳过独立的 boot 分区。由此，虚拟化好了的 Linux 运行起来，既可以享受到 Linux 的高效简洁，也可以同时享受 Windows 上的<s>影音娱乐</s>顺畅开发。</p><img src="/blog/2021/05/02/physical-linux-os-runs-in-vmware/fedora32_on_vmware.png" class=""><p>附：</p><ul><li>/etc/fstab</li></ul><pre><code class="language-shell">## /etc/fstab# Created by anaconda on Fri Oct  2 12:04:56 2015## Accessible filesystems, by reference, are maintained under '/dev/disk'# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info## UEFI partationLABEL=EFI/boot/efivfatnoatime00# VMware boot partationLABEL=fedora-boot/bootext4noatime,x-systemd.device-timeout=1s 00LABEL=fedora /ext4noatime,errors=remount-ro,discard01#/swapfilenoneswapsw00tmpfs/tmptmpfssize=4G,nosuid,noatime00</code></pre>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;最近开发多在 Windows 上进行，硬盘上的另一个操作系统 Fedora 就很久没启动过了。但有时又难免要用到 Fedora 里面自行编译的程序和定制的脚本，关机进到 Fedora 里跑一遍显得过于麻烦。恰好那时听到基友用 HyperV 把自己的 ArchLinux 做成了多启动，既可以在需要 GPU 的时候进入真机，又可以在别的场景下从 Windows 环境操作 HyperV 启动的 ArchLinux，这样可以完美解决以上的问题。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="VMware" scheme="https://andytimes.xyz/tags/VMware/"/>
+    
+    <category term="Virtualization" scheme="https://andytimes.xyz/tags/Virtualization/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>为小米路由器3 配置 opkg</title>
+    <link href="https://andytimes.xyz/blog/2020/07/02/mirouter-r3-opkg/"/>
+    <id>https://andytimes.xyz/blog/2020/07/02/mirouter-r3-opkg/</id>
+    <published>2020-07-02T12:03:06.000Z</published>
+    <updated>2022-03-26T20:42:57.386Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近想在路由器上搭建一些简单的服务，于是开启了路由器的 ssh，发现自带的系统固件内没有 sftp，想着找找有没有别人编译好的。小米路由器的官网说系统固件是根据 openwrt 深度定制的，这时候有两种选择：一种是刷第三方固件（X-wrt 和 PandoraBox 之类）；另一种是在官方固件里面装 opkg 工具来使用 openwrt 的包管理。</p><span id="more"></span><p>出于稳定性和功能完善度考虑，这里我选择第二种方式。要在官方固件使用 opkg，第一步肯定是开启 ssh 了，我的路由器固件版本是开发版2.27.120，按照 <a href="https://d.miwifi.com/rom/ssh">官方教程</a> 或者尝试 openwrt官网给出的 <a href="https://openwrt.org/toh/xiaomi/mir3#get_sshdropbear_access">步骤</a> ，解开ssh之后，查看内核版本为 2.6.36，CPU为 MT7620A (MIPS 24KEc)，根据 /etc/opkg.conf 里面的内容，固件可能是基于 openwrt 12.09 定制的。从谷歌检索了一下，发现了这篇文章：[<a href="https://www.ywlib.com/archives/102.html">小米路由3安装opkg</a>](<a href="https://www.ywlib.com/archives/102.html">https://www.ywlib.com/archives/102.html</a>) ，文章内用到的源是 openwrt 14.07 的，尝试一下发现 openssh-keygen 生成 ecdsa 类型密钥的时候 coredump 了，把源替换成 15.05.1 能完美运行。以下是一些详细步骤：</p><ul><li><p>首先从<a href="https://archive.openwrt.org/chaos_calmer/15.05.1/ramips/mt7620/packages/base/opkg_9c97d5ecd795709c8584e972bfdf3aee3a5b846d-9_ramips_24kec.ipk">这个链接</a> 获取到 opkg 的二进制文件，修改 /etc/opkg.conf 为以下内容：</p><pre><code class="language-shell">src/gz chaos_calmer_base http://archive.openwrt.org/chaos_calmer/15.05.1/ramips/mt7620/packages/basesrc/gz chaos_calmer_packages http://archive.openwrt.org/chaos_calmer/15.05.1/ramips/mt7620/packages/packagessrc/gz chaos_calmer_luci http://archive.openwrt.org/chaos_calmer/15.05.1/ramips/mt7620/packages/lucisrc/gz chaos_calmer_management http://archive.openwrt.org/chaos_calmer/15.05.1/ramips/mt7620/packages/managementsrc/gz chaos_calmer_routing http://archive.openwrt.org/chaos_calmer/15.05.1/ramips/mt7620/packages/routingdest root /datadest ram /tmplists_dir ext /data/var/opkg-listsoption overlay_root /dataarch all 100arch ramips 200arch ramips_24kec 300</code></pre></li><li><p>修改 /etc/profile 中两个关键环境变量（动态链接库和二进制文件搜寻路径）：LD_LIBRARY_PATH 和 PATH，修改后记得让环境变量生效，以下是我的配置：</p><pre><code class="language-shell">export LD_LIBRARY_PATH=/data/usr/lib:/data/lib:/usr/lib:/libexport PATH=/data/usr/bin:/data/usr/sbin:/data/bin:/data/sbin:/bin:/sbin:/usr/bin:/usr/sbin</code></pre></li><li><p><code>opkg update</code> 之后就可以安装软件了，这里遇到了和参考文章里面一样的情况，就是 libc 这个软件包虽然软件源里面有，但似乎没法直接 <code>opkg install libc</code> 安装，而很多源里面软件又需要 libc 状态为已安装。这里手动下载好<a href="https://archive.openwrt.org/chaos_calmer/15.05.1/ramips/mt7620/packages/base/libc_0.9.33.2-1_ramips_24kec.ipk">libc的安装包</a> 安装即可。后面就可以愉快的玩耍了。</p></li></ul><p>在配置安装的软件包时，也遇到了一些问题，其中有一点就是分区不可写入，挂载为读写之后提示分区没有剩余空间。小米路由器官方固件不知道分区是怎么挂载的，好像并没有用 overlayfs，可能是内核版本太旧不支持 overlayfs 的缘故，这里可以在 /data 目录下创建文件夹，例如用 <code>mount --bind /data/root /root</code> 把 /root 目录绑定到 /data/root 下。关于 openwrt 软件源兼容性这个，15.05.1这个版本后，libc 和 gcc 版本都发生变化，ABI很可能已经不兼容，编译后的二进制没法在官方固件运行。要使用最新的软件最保险的是刷第三方固件，下面的链接都会比较有帮助。</p><ul><li>推荐阅读：</li></ul><ol><li><a href="https://openwrt.org/toh/xiaomi/mir3">OpenWrt Project: Xiaomi Mi WiFi R3 (Mi Wifi Router 3 / MIR3 / MI3)</a></li><li><a href="https://openwrt.org/docs/guide-user/additional-software/extroot_configuration">OpenWrt Project: Extroot configuration</a></li><li><a href="https://openwrt.org/zh-cn/doc/uci/fstab">OpenWrt Project: Fstab配置</a></li><li><a href="https://openwrt.org/zh/docs/techref/opkg">OpenWrt Project: OPKG 软件包管理</a></li></ol>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;最近想在路由器上搭建一些简单的服务，于是开启了路由器的 ssh，发现自带的系统固件内没有 sftp，想着找找有没有别人编译好的。小米路由器的官网说系统固件是根据 openwrt 深度定制的，这时候有两种选择：一种是刷第三方固件（X-wrt 和 PandoraBox 之类）；另一种是在官方固件里面装 opkg 工具来使用 openwrt 的包管理。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="openwrt" scheme="https://andytimes.xyz/tags/openwrt/"/>
+    
+    <category term="路由器" scheme="https://andytimes.xyz/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>迁移到 Github</title>
+    <link href="https://andytimes.xyz/blog/2019/02/13/migrate-to-github/"/>
+    <id>https://andytimes.xyz/blog/2019/02/13/migrate-to-github/</id>
+    <published>2019-02-13T20:45:06.000Z</published>
+    <updated>2022-03-27T02:33:39.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天无意间打开了博客，发现访问速度慢得让人无法接受。博客托管在 Coding Pages 上，这段时间 Coding Pages 的服务似乎劣化了，原本不想这么麻烦去迁移，后来发现 Github Pages 在国内的访问速度挺不错的，于是开始了迁移工作。</p><span id="more"></span><p>Github Pages 提供的服务并不如 Coding Pages 那么全面，不过够用即可，利用 Travis-CI 可以让日后的博客的部署工作更加便利。比如，在 Github 上在线编辑一份 markdown 格式的文章，Travis-CI 便会在 commit 后生成对应的静态网页文件，省去了手动生成再部署的步骤。</p><p><s>网上搜索到了一篇关于用 Travis-CI 部署 hexo 博客的文章，写的挺不错的： <a href="https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/">使用 Travis CI 自动部署 Hexo 博客</a></s></p><p>2022-03-27: 上面的博客已挂，Travis-CI 目前已收费，建议使用 GitHub Action，相关教程网上也有很多。</p><p>依照上述步骤，顺利的完成了迁移工作，下面是博客和博客主题的源码：</p><ul><li><a href="https://github.com/andytimes/blog">https://github.com/andytimes/blog</a></li><li><a href="https://github.com/andytimes/hexo-theme-next">https://github.com/andytimes/hexo-theme-next</a></li></ul><p>不得不说 Travis-CI 是个好工具</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;今天无意间打开了博客，发现访问速度慢得让人无法接受。博客托管在 Coding Pages 上，这段时间 Coding Pages 的服务似乎劣化了，原本不想这么麻烦去迁移，后来发现 Github Pages 在国内的访问速度挺不错的，于是开始了迁移工作。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="hexo" scheme="https://andytimes.xyz/tags/hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>网页端的音乐可视化</title>
+    <link href="https://andytimes.xyz/blog/2018/06/28/try-web-animation/"/>
+    <id>https://andytimes.xyz/blog/2018/06/28/try-web-animation/</id>
+    <published>2018-06-28T09:41:56.000Z</published>
+    <updated>2019-08-11T15:03:01.000Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li>更新于 2019-08-11</li></ul><p>去年 (2018)，因为对 JavaScript 比较感兴趣，加上学校在教前端的内容，所以做了一个简单的音乐可视化网页。然而因为没有系统的学过 JS，所以编码时候遇到了内存泄露还有一些奇怪的问题没有解决，直到今天才把文章给补完。</p><span id="more"></span><p>很多年以前，还在用着诺基亚塞班手机的时候，我非常喜欢一款播放器，名字叫 <a href="http://www.lonelycatgames.com/?app=lcgjukebox">LCG Jukebox</a> ，界面大概长这样</p><img src="/blog/2018/06/28/try-web-animation/jukebox.jpg" class="" title="LCG Jukebox"><p>右上角会有一个简单的波形分析器，波形会根据音乐的内容而变化。所以想在网页播放音乐时也能展示出类似的效果。查阅一些资料之后，发现了一个名为 p5.js 的 JavaScript库，使用 p5.js 可以方便地处理视音频和绘图，其中 p5 的音频库能很好地实现波形效果，p5.js 的官网提供了一个很好的范例 <a href="https://p5js.org/zh-Hans/examples/sound-oscillator-frequency.html">Oscillator Frequency</a> 要实现音乐文件作为音频输入，通过 <code>loadSound()</code></p><pre><code class="language-js">let musicfunction preload() &#123;music = loadSound(&quot;path_to_music_file&quot;)&#125;function setup() &#123;music.play()&#125;</code></pre><p>有了音频源之后，使用 <a href="https://p5js.org/reference/#/p5.FFT" title="快速傅里叶变换">p5.FFT</a> 提供的 <a href="https://p5js.org/reference/#/p5.FFT/waveform">waveform()</a> 方法分析出波形数据，然后在屏幕上画出波形动画：</p><pre><code class="language-js">let fftfunction setup() &#123;let cnv = createCanvas(150, 50)noFill()cnv.parent('vz')fft = new p5.FFT()frameRate(30)&#125;function draw() &#123;let waveform = fft.waveform()// white linestroke(255, 255, 255)strokeWeight(2)beginShape()for (let i = 0; i &lt; waveform.length; i++) &#123;let x = map(i, 0, waveform.length, 0, width)let y = map(waveform[i], -1, 1, 0, height)vertex(x, y)&#125;endShape()&#125;</code></pre><p>到这里基本就完成了。由于网页上有多个音乐文件，加上没有暂停音乐的功能，于是优化一下，在点击波形动画区域来实现播放/暂停，这里需要引入 <a href="https://p5js.org/reference/#/libraries/p5.dom">p5.dom</a> 这个库：</p><pre><code class="language-js">function setup() &#123;let cnv = createCanvas(150, 50)// ...cnv.mouseClicked(togglePlay)// ...&#125;function togglePlay() &#123;if (song.isPlaying()) &#123;song.pause()&#125; else &#123;song.play()&#125;&#125;</code></pre><p>在音乐正在播放时，切换到下一首，有时即使利用 <code>song.stop()</code> 也会出现同时播放两首音乐的问题。这个问题困扰了我很久，后来仔细阅读文档，发现是音频默认的 <code>sustain</code> 播放模式造成的，修改为 <code>restart</code> 模式即可解决：</p><pre><code class="language-js">const music = [loadSound(&quot;music_file1&quot;), loadSound(&quot;music_file2&quot;),               loadSound(&quot;music_file3&quot;)]function play_music(id) &#123;let next = music[id]if (song != next) &#123;song.stop()song = next&#125;song.playMode('restart')song.play()&#125;</code></pre><p>为网页所写的代码在这里 <a href="https://github.com/andytimes/web2018/blob/master/js/sketch.js">andytimes / web2018</a> ，然后访问 <a href="https://2018.andytimes.xyz">2018.andytimes.xyz</a> 能看到最终效果，网页只是歌手 Alan Walker <a href="http://alanwalker.no/">官网</a> 的仿制版，其中还擅自使用了一些图片和音频素材：</p><img src="/blog/2018/06/28/try-web-animation/visualizer.png" class=""><p>在利用 p5.js  绘图的页面，内存占用挺高的，而且似乎还存在着内存泄露的问题，我也找过别的解决方案，比如这种更原生一些的方法: <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Audio_API/Visualizations_with_Web_Audio_API">基于Web Audio API实现音频可视化效果</a> ，然而内存泄露的问题更加严重，也许是我的水平不够吧 hhh，希望以后还有机会继续了解更多 Web端的知识。</p>]]></content>
+    
+    
+    <summary type="html">&lt;ul&gt;
+&lt;li&gt;更新于 2019-08-11&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;去年 (2018)，因为对 JavaScript 比较感兴趣，加上学校在教前端的内容，所以做了一个简单的音乐可视化网页。然而因为没有系统的学过 JS，所以编码时候遇到了内存泄露还有一些奇怪的问题没有解决，直到今天才把文章给补完。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="Javascript" scheme="https://andytimes.xyz/tags/Javascript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Fedora 28</title>
+    <link href="https://andytimes.xyz/blog/2018/05/22/upgrading-f27tof28/"/>
+    <id>https://andytimes.xyz/blog/2018/05/22/upgrading-f27tof28/</id>
+    <published>2018-05-22T19:58:06.000Z</published>
+    <updated>2022-03-26T20:42:57.382Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天把 Fedora 从 27 升级到了 28:</p><span id="more"></span><img src="/blog/2018/05/22/upgrading-f27tof28/upgraded_fedora_28.png" class="" title="Fedora 28"><p>回想一下，感觉这个版本号迭代也挺快的。记得刚开始使用的时候，好像是 22 还是 23.</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;今天把 Fedora 从 27 升级到了 28:&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="Linux" scheme="https://andytimes.xyz/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>优化 C++ 程序性能的几种方法</title>
+    <link href="https://andytimes.xyz/blog/2018/03/24/optimize-the-cpp-programs/"/>
+    <id>https://andytimes.xyz/blog/2018/03/24/optimize-the-cpp-programs/</id>
+    <published>2018-03-24T15:55:50.000Z</published>
+    <updated>2022-03-26T20:42:57.382Z</updated>
+    
+    <content type="html"><![CDATA[<p>C/C++ 的一些特性使得它们成为高性能软件的首选语言，然而如果没有利用好其语言特性，便会无法达到其最高性能。由于 CPU 和内存往往成为性能瓶颈，优化的重点也在于这两方面。下面会讨论如何针对这两个方向进行优化。</p><span id="more"></span><p>现代 CPU 由于缓存，流水线和架构之类的升级，性能对比从前已经有了极大的提升。而在图形和视音频处理中，应用最广泛的便是 CPU 提供的 SIMD 技术（Single Instruction Multiple Data，中文：单指令流多数据流）。通过使用 SIMD，能够大幅提升相关运算的性能。比如在 Intel CPU 的 SSE 指令集中，<code>addps </code> 指令可以将打包进 128位 XMM 寄存器的 4 个单精度浮点数（32位 float）并行相加，在 Skylake 架构上，<code>addps</code> 一般仅需 4 个时钟周期即可完成，而且其吞吐量为 0.5，即在一个时钟周期可执行两次 <code>addps</code> 指令。Intel 还提供了 C 风格的内部函数（Intel intrinsic instructions）来使用 SIMD，从而无需手动书写汇编代码。并且使用内部函数，可以让编译器有更大的优化空间。下面是一个使用内部函数的简单例子：</p><pre><code class="language-c">// Please compile with gcc or clang#include &lt;xmmintrin.h&gt;// _mm_store_ps(), _mm_add_ps(), _mm_load_ps()#include &lt;stdio.h&gt;__attribute__((aligned(16))) float A[] = &#123;1.0f, 1.0f, 2.0f, 2.0f&#125;;__attribute__((aligned(16))) float B[] = &#123;3.0f, 3.0f, 4.0f, 4.0f&#125;;__attribute__((aligned(16))) float C[] = &#123;0.0f, 0.0f, 0.0f, 0.0f&#125;;int main(void)&#123;__m128 a = _mm_load_ps(&amp;A[0]);__m128 b = _mm_load_ps(&amp;B[0]);__m128 s = _mm_add_ps(a, b);_mm_store_ps(&amp;C[0], s);printf(&quot;%g %g %g %g\n&quot;,C[0], C[1], C[2], C[3]);&#125;</code></pre><p>上面使用的 SSE 指令展现出一个限制，就是需要考虑内存对齐问题。尽管有可以存取未对齐元素的内部函数（比如，_mm_loadu_ps(), _mm_storeu_ps()），但对齐的内存读写往往能带来更好的性能。</p><p>内存对性能影响有两个方面：一是动态内存分配/释放对性能的影响；二是内存编排的合理性对性能的影响。</p><p>首先，C++ 提供了 new/delete 来执行动态内存分配/释放。然而由于种种原因，使用 new/delete 分配/释放内存的是低效的。因此，尽量避免动态内存分配，或使用自定义分配器从预先分配好的大块内存中完成分配请求，可以减少内存分配/释放对性能的影响。</p><p>在编写代码的时候，是否考虑 CPU 如何处理数据以及代码，对性能会有很大的影响。比起在内存中排布成松散的碎片状，如果数据在内存中以紧凑连续的方式排布，往往处理起来会高效得多。因为 CPU 在处理数据时，会尽可能地读取相关数据进入缓存，代码也是一样的道理。在性能关键处，代码应当足够简单，避免函数调用，以提高指令缓存命中率。</p><p>由于接触程序性能优化的时间并不久，上面所述内容也许不够严谨，但可供初次涉及此领域的同学参考。限于篇幅，内存读写优化这部分也就没有过多介绍。希望对性能优化理解更深入后，有机会可以继续写一些相关内容。</p><ul><li>推荐阅读：</li></ul><ol><li><a href="https://software.intel.com/sites/landingpage/IntrinsicsGuide/">Intel Intrinsics Guide</a></li><li><a href="http://www.agner.org/optimize/instruction_tables.pdf" title="Lists of instruction latencies, throughputs and micro-operation breakdowns for Intel, AMDand VIA CPUs">Instruction tables</a></li></ol>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;C/C++ 的一些特性使得它们成为高性能软件的首选语言，然而如果没有利用好其语言特性，便会无法达到其最高性能。由于 CPU 和内存往往成为性能瓶颈，优化的重点也在于这两方面。下面会讨论如何针对这两个方向进行优化。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="C++" scheme="https://andytimes.xyz/tags/C/"/>
+    
+    <category term="性能优化" scheme="https://andytimes.xyz/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>关于性能优化的一些想法</title>
+    <link href="https://andytimes.xyz/blog/2018/03/24/thinking-about-optimization/"/>
+    <id>https://andytimes.xyz/blog/2018/03/24/thinking-about-optimization/</id>
+    <published>2018-03-24T15:50:33.000Z</published>
+    <updated>2022-03-26T20:42:57.382Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近一直在做性能优化方面的学习，思绪万千萦绕，所以想记录下来。只是简单聊一聊。</p><p>随着接触游戏编程的次数增多，对程序的性能优化也算有了一点正确的理解。回忆起来，我依旧记得之前为了提高程序性能，而做的那些实则无益的“优化”。</p><p>下面是一个简单的例子：</p><span id="more"></span><pre><code class="language-c">void swap(int *x, int *y)&#123;        int tmp = *x;        *x = *y;        *y = tmp;&#125;void swap_by_xor(int *x, int *y)&#123;        *x ^= *y;        *y ^= *x;        *x ^= *y;&#125;</code></pre><p>两个函数做的工作都是一样：交换两个整型变量的值。第一个函数使用常规方法（利用临时变量）。而第二个函数 swap_by_xor() 使用异或（xor），使得不需用临时变量便可完成交换（异或两次可得到原值），这样也就免去在内存中开辟空间。如果上面的例子改写成交换/翻转数组之类的结构，减少的内存读写次数便会相当可观。</p><p>然而，这样考虑并不正确，汇编后的结果是这样的（x86_64 gcc 7.2，O2 优化）：</p><pre><code class="language-asm">swap:        movl    (%rdi), %eax        movl    (%rsi), %edx        movl    %edx, (%rdi)        movl    %eax, (%rsi)        retswap_by_xor:        movl    (%rdi), %eax        xorl    (%rsi), %eax        movl    %eax, (%rdi)        xorl    (%rsi), %eax        movl    %eax, (%rsi)        xorl    %eax, (%rdi)        ret</code></pre><p>swap() 中的临时变量实际是直接放入了寄存器，并不进入内存；而 swap_by_xor()，对比 swap()  反而多了几条 xor 指令。由此可见，实际用 xor “优化” 不能带来什么好处。虽然两个函数实际执行速度差不多，但就可读性而言，swap() 是完胜 swap_by_xor() 的。</p><p>现代编译器所能做的优化，远比上面的多得多。因此写出逻辑清晰的源代码，往往便能生成高效的汇编。只有在编译器生成的汇编不符合预期时才考虑去改进源代码。不要在做性能测试之前就尝试进行优化，这样可能会带来糟糕的结果。</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;最近一直在做性能优化方面的学习，思绪万千萦绕，所以想记录下来。只是简单聊一聊。&lt;/p&gt;
+&lt;p&gt;随着接触游戏编程的次数增多，对程序的性能优化也算有了一点正确的理解。回忆起来，我依旧记得之前为了提高程序性能，而做的那些实则无益的“优化”。&lt;/p&gt;
+&lt;p&gt;下面是一个简单的例子：&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="C++" scheme="https://andytimes.xyz/tags/C/"/>
+    
+    <category term="性能优化" scheme="https://andytimes.xyz/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Rewrite TV 完结</title>
+    <link href="https://andytimes.xyz/blog/2017/03/26/rewrite-tv/"/>
+    <id>https://andytimes.xyz/blog/2017/03/26/rewrite-tv/</id>
+    <published>2017-03-26T11:26:56.000Z</published>
+    <updated>2022-03-26T20:42:57.382Z</updated>
+    
+    <content type="html"><![CDATA[<p>昨晚 Rewrite 第二季动画放映结束，整个 Rewrite TV 也完结了。虽然两季总共只有 24话，<br>造成很多情节被删减，但这一年半的时间里，作为游戏党，见证游戏被一步步动画化的过程<br>还是很不错的。</p><p>从动画化宣布时的惊喜，至第一季的期待与失望，再到第二季的诚意满满，直至完结时的<br>空虚。回顾整个历程，体会心情的起伏，还是令人感触。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;昨晚 Rewrite 第二季动画放映结束，整个 Rewrite TV 也完结了。虽然两季总共只有 24话，&lt;br&gt;
+造成很多情节被删减，但这一年半的时间里，作为游戏党，见证游戏被一步步动画化的过程&lt;br&gt;
+还是很不错的。&lt;/p&gt;
+&lt;p&gt;从动画化宣布时的惊喜，至第一季的期待与</summary>
+      
+    
+    
+    
+    
+    <category term="日本动画" scheme="https://andytimes.xyz/tags/%E6%97%A5%E6%9C%AC%E5%8A%A8%E7%94%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>编程语言的学习</title>
+    <link href="https://andytimes.xyz/blog/2017/01/29/programming-language/"/>
+    <id>https://andytimes.xyz/blog/2017/01/29/programming-language/</id>
+    <published>2017-01-29T21:00:00.000Z</published>
+    <updated>2022-03-26T20:42:57.382Z</updated>
+    
+    <content type="html"><![CDATA[<p>这几天有点无聊，就随便写点什么吧。</p><p>提一下，目前我在这儿写的东西都是面向程序员的，内容多和程序设计相关，见谅。</p><span id="more"></span><p>觉得学习就是一个循序渐进的过程，认真地一步步走下去，渐渐地就会有所收获。</p><p>因为好久没写 C++ 代码了，这几天空闲时间把 C++ Primer 拿出来温习了一下，也把 Effictive C++ 3th 看了一遍。感想就是在理解一门编程语言的独有思想之前，是很难发挥这门语言的强大力量，也难以理解它是如何运作的。看到自己 16 年暑假前期写的那几段 C++ 代码，也正好证实了这一点。这次阅读算是小有收获，对 C++ 面向对象编程的 is-a 和 has-a 也不再困惑了，举个有关 is-a 概念的例子：</p><pre><code class="language-cpp">class Person &#123;public:void eat();private:// ...&#125;;class Student : public Person &#123;public:void doHomework();private:// ...&#125;;</code></pre><p>公有继承 (public inheritance) 要展现出 is-a (是一种，是一个) 的关系，上面的例子就是一个比较清晰的展示：“学生是一个人”，“学生”可以做“人”能做的事情，比如“人”需要吃饭，“学生”也需要吃饭。但反过来就不必满足，“学生”要写作业，但并非所有的“人”都要写作业。所以 <code>class Student</code> 可以看作是 <code>class Person</code> 的特化版本。当然，这个例子展示的，只是一般意义上的自然语言逻辑，其实有些继承关系在程序语言中并没有这么清晰，甚至有点反直觉，因为程序语言要求精确无歧义，而自然语言不一定能做到。所以不错的做法就是，保证继承自基类 (base class) 的所有操作都能在派生类 (derived class) 上正确无误地执行，这样可以有效避免设计出错误的继承体系。</p><p>上面聊了 C++ 的继承关系，这里也稍微提一下多重继承 (multiple inheritance)，因为去年暑假写的那几段 C++ 也用到了这个。多重继承是派生类含有多个基类的继承体系。多重继承会比单一继承的逻辑更复杂，也更容易导致忘记初始化成员变量。而且在继承体系内，如果出现重复继承，还需引入虚继承来解决。所以除非情况适用，否则最好不去使用多重继承。</p><p>这里说一句老生常谈的话：学习编程语言最重要的一点就是多练。<br>在练习的过程中，慢慢就会发现自己有什么不清楚的地方，这时再去查阅相关资料，疑惑就很容易解决了。比如我几年前写 C 程序的时候，对一些概念比较朦胧，比如：为什么 inline 函数和结构体 (struct) 可以放头文件里？指针指向的地址与指针的地址的区别，还有指向指针 (pointer) 的指针的取值取址。但这些都在练习中慢慢清晰起来了。我觉得要理解这些细节，光看书可能是不行的，因为多数书籍限于篇幅，对这些细节只是一语带过，而且不是自己实践得出的结论，也不会足够深刻。去写写代码，看看编译器和程序的输出，慢慢地，一切就会清晰起来。</p><p>当然，编程语言只是程序设计的一部分，学会一门语言并不代表一定能写出好的程序，但在适用的场景下，一定会让使用者更加得心应手。</p><p>就这样吧。</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;这几天有点无聊，就随便写点什么吧。&lt;/p&gt;
+&lt;p&gt;提一下，目前我在这儿写的东西都是面向程序员的，内容多和程序设计相关，见谅。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="程序设计" scheme="https://andytimes.xyz/tags/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/"/>
+    
+    <category term="编程语言" scheme="https://andytimes.xyz/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>关于 2016</title>
+    <link href="https://andytimes.xyz/blog/2017/01/29/about-2016/"/>
+    <id>https://andytimes.xyz/blog/2017/01/29/about-2016/</id>
+    <published>2017-01-29T20:00:00.000Z</published>
+    <updated>2022-03-26T20:42:57.382Z</updated>
+    
+    <content type="html"><![CDATA[<p>2017 丁酉鸡年到了，也意味着农历和阳历的 2016 都已经结束。怎么说呢，2016 给了我太多“惊喜”，希望 2017 过得平淡点。</p><p>祝我 2017 好运吧。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;2017 丁酉鸡年到了，也意味着农历和阳历的 2016 都已经结束。怎么说呢，2016 给了我太多“惊喜”，希望 2017 过得平淡点。&lt;/p&gt;
+&lt;p&gt;祝我 2017 好运吧。&lt;/p&gt;
+</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>第一篇文章</title>
+    <link href="https://andytimes.xyz/blog/2016/10/26/hello-world/"/>
+    <id>https://andytimes.xyz/blog/2016/10/26/hello-world/</id>
+    <published>2016-10-26T00:00:00.000Z</published>
+    <updated>2022-03-26T20:42:57.382Z</updated>
+    
+    <content type="html"><![CDATA[<p>还没想好写什么，就这样吧。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;还没想好写什么，就这样吧。&lt;/p&gt;
+</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+</feed>

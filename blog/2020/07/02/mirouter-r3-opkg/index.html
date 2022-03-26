@@ -1,0 +1,113 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
+
+<!-- Prefetch -->
+<link rel="preconnect" href="https://fonts.googleapis.com/" crossorigin>
+<link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net/">
+
+<!-- Meta -->
+<title>&#x4E3A;&#x5C0F;&#x7C73;&#x8DEF;&#x7531;&#x5668;3 &#x914D;&#x7F6E; opkg | Memory-copy</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Google fonts -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&amp;display=swap&amp;text=Memory-copy0123456789">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inconsolata&amp;display=swap">
+<link rel="shortcut icon" href="/assets/favicon.ico"><link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png"><link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48x48.png"><link rel="manifest" href="/assets/manifest.json"><meta name="mobile-web-app-capable" content="yes"><meta name="theme-color" content="#7f9cf5"><meta name="application-name" content="Memory-copy"><link rel="apple-touch-icon" sizes="57x57" href="/assets/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="/assets/apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="/assets/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="/assets/apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="/assets/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="/assets/apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="/assets/apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="/assets/apple-touch-icon-152x152.png"><link rel="apple-touch-icon" sizes="167x167" href="/assets/apple-touch-icon-167x167.png"><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon-180x180.png"><link rel="apple-touch-icon" sizes="1024x1024" href="/assets/apple-touch-icon-1024x1024.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Memory-copy"><meta name="msapplication-TileColor" content="#1a202c"><meta name="msapplication-TileImage" content="/assets/mstile-144x144.png"><meta name="msapplication-config" content="/assets/browserconfig.xml"><script defer="defer" src="/build/runtime.4f81b965ee044866d74b.js"></script><script defer="defer" src="/build/app.c495528d022cb4af101d.js"></script><link href="/build/app.c495528d022cb4af101d.css" rel="stylesheet"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Memory-copy" type="application/atom+xml">
+</head><body class="bg-background text-content antialiased scrollbar-dark"><div class="container max-w-3xl mx-auto px-4 flex flex-col min-h-screen"><div class="flex-grow">
+<header>
+  <nav class="flex py-4 justify-end items-center">
+    <a class="ml-5 text-content text-opacity-75 hover:text-accent" href="/about/">About</a><a class="ml-5 text-content text-opacity-75 hover:text-accent" href="/archives/">Archives</a>
+    <div class="w-2"></div>
+    
+      <a class="header-icon-btn rss" title="RSS" href="/atom.xml"></a>
+    
+      <a class="header-icon-btn github" title="GitHub" target="_blank" rel="noopener" href="https://github.com/andytimes"></a>
+    
+  </nav>
+  <h1 class="flex-shrink-0 font-logo text-white text-5xl leading-none text-right pb-12">
+    <a href="/">Memory-copy</a>
+  </h1>
+</header>
+ <main>
+  
+
+<article id="post-mirouter-r3-opkg" class="article-container" itemscope itemtype="https://schema.org/Article">
+  <header class="article-header">
+    <div class="text-accent leading-none pb-2 text-sm">Jul 2, 2020</div>
+    <h1 class="text-2xl lg:text-3xl font-light leading-tight pt-2" itemprop="headline">
+      <a class="block hover:text-accent" href="/blog/2020/07/02/mirouter-r3-opkg/">&#x4E3A;&#x5C0F;&#x7C73;&#x8DEF;&#x7531;&#x5668;3 &#x914D;&#x7F6E; opkg</a>
+    </h1>
+  </header>
+  <div class="article-body" itemprop="articleBody">
+    <p>&#x6700;&#x8FD1;&#x60F3;&#x5728;&#x8DEF;&#x7531;&#x5668;&#x4E0A;&#x642D;&#x5EFA;&#x4E00;&#x4E9B;&#x7B80;&#x5355;&#x7684;&#x670D;&#x52A1;&#xFF0C;&#x4E8E;&#x662F;&#x5F00;&#x542F;&#x4E86;&#x8DEF;&#x7531;&#x5668;&#x7684; ssh&#xFF0C;&#x53D1;&#x73B0;&#x81EA;&#x5E26;&#x7684;&#x7CFB;&#x7EDF;&#x56FA;&#x4EF6;&#x5185;&#x6CA1;&#x6709; sftp&#xFF0C;&#x60F3;&#x7740;&#x627E;&#x627E;&#x6709;&#x6CA1;&#x6709;&#x522B;&#x4EBA;&#x7F16;&#x8BD1;&#x597D;&#x7684;&#x3002;&#x5C0F;&#x7C73;&#x8DEF;&#x7531;&#x5668;&#x7684;&#x5B98;&#x7F51;&#x8BF4;&#x7CFB;&#x7EDF;&#x56FA;&#x4EF6;&#x662F;&#x6839;&#x636E; openwrt &#x6DF1;&#x5EA6;&#x5B9A;&#x5236;&#x7684;&#xFF0C;&#x8FD9;&#x65F6;&#x5019;&#x6709;&#x4E24;&#x79CD;&#x9009;&#x62E9;&#xFF1A;&#x4E00;&#x79CD;&#x662F;&#x5237;&#x7B2C;&#x4E09;&#x65B9;&#x56FA;&#x4EF6;&#xFF08;X-wrt &#x548C; PandoraBox &#x4E4B;&#x7C7B;&#xFF09;&#xFF1B;&#x53E6;&#x4E00;&#x79CD;&#x662F;&#x5728;&#x5B98;&#x65B9;&#x56FA;&#x4EF6;&#x91CC;&#x9762;&#x88C5; opkg &#x5DE5;&#x5177;&#x6765;&#x4F7F;&#x7528; openwrt &#x7684;&#x5305;&#x7BA1;&#x7406;&#x3002;</p>
+<span id="more"></span>
+<p>&#x51FA;&#x4E8E;&#x7A33;&#x5B9A;&#x6027;&#x548C;&#x529F;&#x80FD;&#x5B8C;&#x5584;&#x5EA6;&#x8003;&#x8651;&#xFF0C;&#x8FD9;&#x91CC;&#x6211;&#x9009;&#x62E9;&#x7B2C;&#x4E8C;&#x79CD;&#x65B9;&#x5F0F;&#x3002;&#x8981;&#x5728;&#x5B98;&#x65B9;&#x56FA;&#x4EF6;&#x4F7F;&#x7528; opkg&#xFF0C;&#x7B2C;&#x4E00;&#x6B65;&#x80AF;&#x5B9A;&#x662F;&#x5F00;&#x542F; ssh &#x4E86;&#xFF0C;&#x6211;&#x7684;&#x8DEF;&#x7531;&#x5668;&#x56FA;&#x4EF6;&#x7248;&#x672C;&#x662F;&#x5F00;&#x53D1;&#x7248;2.27.120&#xFF0C;&#x6309;&#x7167; <a target="_blank" rel="noopener" href="https://d.miwifi.com/rom/ssh">&#x5B98;&#x65B9;&#x6559;&#x7A0B;</a> &#x6216;&#x8005;&#x5C1D;&#x8BD5; openwrt&#x5B98;&#x7F51;&#x7ED9;&#x51FA;&#x7684; <a target="_blank" rel="noopener" href="https://openwrt.org/toh/xiaomi/mir3#get_sshdropbear_access">&#x6B65;&#x9AA4;</a> &#xFF0C;&#x89E3;&#x5F00;ssh&#x4E4B;&#x540E;&#xFF0C;&#x67E5;&#x770B;&#x5185;&#x6838;&#x7248;&#x672C;&#x4E3A; 2.6.36&#xFF0C;CPU&#x4E3A; MT7620A (MIPS 24KEc)&#xFF0C;&#x6839;&#x636E; /etc/opkg.conf &#x91CC;&#x9762;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x56FA;&#x4EF6;&#x53EF;&#x80FD;&#x662F;&#x57FA;&#x4E8E; openwrt 12.09 &#x5B9A;&#x5236;&#x7684;&#x3002;&#x4ECE;&#x8C37;&#x6B4C;&#x68C0;&#x7D22;&#x4E86;&#x4E00;&#x4E0B;&#xFF0C;&#x53D1;&#x73B0;&#x4E86;&#x8FD9;&#x7BC7;&#x6587;&#x7AE0;&#xFF1A;[<a target="_blank" rel="noopener" href="https://www.ywlib.com/archives/102.html">&#x5C0F;&#x7C73;&#x8DEF;&#x7531;3&#x5B89;&#x88C5;opkg</a>](<a target="_blank" rel="noopener" href="https://www.ywlib.com/archives/102.html">https://www.ywlib.com/archives/102.html</a>) &#xFF0C;&#x6587;&#x7AE0;&#x5185;&#x7528;&#x5230;&#x7684;&#x6E90;&#x662F; openwrt 14.07 &#x7684;&#xFF0C;&#x5C1D;&#x8BD5;&#x4E00;&#x4E0B;&#x53D1;&#x73B0; openssh-keygen &#x751F;&#x6210; ecdsa &#x7C7B;&#x578B;&#x5BC6;&#x94A5;&#x7684;&#x65F6;&#x5019; coredump &#x4E86;&#xFF0C;&#x628A;&#x6E90;&#x66FF;&#x6362;&#x6210; 15.05.1 &#x80FD;&#x5B8C;&#x7F8E;&#x8FD0;&#x884C;&#x3002;&#x4EE5;&#x4E0B;&#x662F;&#x4E00;&#x4E9B;&#x8BE6;&#x7EC6;&#x6B65;&#x9AA4;&#xFF1A;</p>
+<ul>
+<li>
+<p>&#x9996;&#x5148;&#x4ECE;<a target="_blank" rel="noopener" href="https://archive.openwrt.org/chaos_calmer/15.05.1/ramips/mt7620/packages/base/opkg_9c97d5ecd795709c8584e972bfdf3aee3a5b846d-9_ramips_24kec.ipk">&#x8FD9;&#x4E2A;&#x94FE;&#x63A5;</a> &#x83B7;&#x53D6;&#x5230; opkg &#x7684;&#x4E8C;&#x8FDB;&#x5236;&#x6587;&#x4EF6;&#xFF0C;&#x4FEE;&#x6539; /etc/opkg.conf &#x4E3A;&#x4EE5;&#x4E0B;&#x5185;&#x5BB9;&#xFF1A;</p>
+<pre><code class="language-shell">src/gz chaos_calmer_base http://archive.openwrt.org/chaos_calmer/15.05.1/ramips/mt7620/packages/base
+src/gz chaos_calmer_packages http://archive.openwrt.org/chaos_calmer/15.05.1/ramips/mt7620/packages/packages
+src/gz chaos_calmer_luci http://archive.openwrt.org/chaos_calmer/15.05.1/ramips/mt7620/packages/luci
+src/gz chaos_calmer_management http://archive.openwrt.org/chaos_calmer/15.05.1/ramips/mt7620/packages/management
+src/gz chaos_calmer_routing http://archive.openwrt.org/chaos_calmer/15.05.1/ramips/mt7620/packages/routing
+
+dest root /data
+dest ram /tmp
+lists_dir ext /data/var/opkg-lists
+option overlay_root /data
+arch all 100
+arch ramips 200
+arch ramips_24kec 300
+</code></pre>
+</li>
+<li>
+<p>&#x4FEE;&#x6539; /etc/profile &#x4E2D;&#x4E24;&#x4E2A;&#x5173;&#x952E;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#xFF08;&#x52A8;&#x6001;&#x94FE;&#x63A5;&#x5E93;&#x548C;&#x4E8C;&#x8FDB;&#x5236;&#x6587;&#x4EF6;&#x641C;&#x5BFB;&#x8DEF;&#x5F84;&#xFF09;&#xFF1A;LD_LIBRARY_PATH &#x548C; PATH&#xFF0C;&#x4FEE;&#x6539;&#x540E;&#x8BB0;&#x5F97;&#x8BA9;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x751F;&#x6548;&#xFF0C;&#x4EE5;&#x4E0B;&#x662F;&#x6211;&#x7684;&#x914D;&#x7F6E;&#xFF1A;</p>
+<pre><code class="language-shell">export LD_LIBRARY_PATH=/data/usr/lib:/data/lib:/usr/lib:/lib
+export PATH=/data/usr/bin:/data/usr/sbin:/data/bin:/data/sbin:/bin:/sbin:/usr/bin:/usr/sbin
+</code></pre>
+</li>
+<li>
+<p><code>opkg update</code> &#x4E4B;&#x540E;&#x5C31;&#x53EF;&#x4EE5;&#x5B89;&#x88C5;&#x8F6F;&#x4EF6;&#x4E86;&#xFF0C;&#x8FD9;&#x91CC;&#x9047;&#x5230;&#x4E86;&#x548C;&#x53C2;&#x8003;&#x6587;&#x7AE0;&#x91CC;&#x9762;&#x4E00;&#x6837;&#x7684;&#x60C5;&#x51B5;&#xFF0C;&#x5C31;&#x662F; libc &#x8FD9;&#x4E2A;&#x8F6F;&#x4EF6;&#x5305;&#x867D;&#x7136;&#x8F6F;&#x4EF6;&#x6E90;&#x91CC;&#x9762;&#x6709;&#xFF0C;&#x4F46;&#x4F3C;&#x4E4E;&#x6CA1;&#x6CD5;&#x76F4;&#x63A5; <code>opkg install libc</code> &#x5B89;&#x88C5;&#xFF0C;&#x800C;&#x5F88;&#x591A;&#x6E90;&#x91CC;&#x9762;&#x8F6F;&#x4EF6;&#x53C8;&#x9700;&#x8981; libc &#x72B6;&#x6001;&#x4E3A;&#x5DF2;&#x5B89;&#x88C5;&#x3002;&#x8FD9;&#x91CC;&#x624B;&#x52A8;&#x4E0B;&#x8F7D;&#x597D;<a target="_blank" rel="noopener" href="https://archive.openwrt.org/chaos_calmer/15.05.1/ramips/mt7620/packages/base/libc_0.9.33.2-1_ramips_24kec.ipk">libc&#x7684;&#x5B89;&#x88C5;&#x5305;</a> &#x5B89;&#x88C5;&#x5373;&#x53EF;&#x3002;&#x540E;&#x9762;&#x5C31;&#x53EF;&#x4EE5;&#x6109;&#x5FEB;&#x7684;&#x73A9;&#x800D;&#x4E86;&#x3002;</p>
+</li>
+</ul>
+<p>&#x5728;&#x914D;&#x7F6E;&#x5B89;&#x88C5;&#x7684;&#x8F6F;&#x4EF6;&#x5305;&#x65F6;&#xFF0C;&#x4E5F;&#x9047;&#x5230;&#x4E86;&#x4E00;&#x4E9B;&#x95EE;&#x9898;&#xFF0C;&#x5176;&#x4E2D;&#x6709;&#x4E00;&#x70B9;&#x5C31;&#x662F;&#x5206;&#x533A;&#x4E0D;&#x53EF;&#x5199;&#x5165;&#xFF0C;&#x6302;&#x8F7D;&#x4E3A;&#x8BFB;&#x5199;&#x4E4B;&#x540E;&#x63D0;&#x793A;&#x5206;&#x533A;&#x6CA1;&#x6709;&#x5269;&#x4F59;&#x7A7A;&#x95F4;&#x3002;&#x5C0F;&#x7C73;&#x8DEF;&#x7531;&#x5668;&#x5B98;&#x65B9;&#x56FA;&#x4EF6;&#x4E0D;&#x77E5;&#x9053;&#x5206;&#x533A;&#x662F;&#x600E;&#x4E48;&#x6302;&#x8F7D;&#x7684;&#xFF0C;&#x597D;&#x50CF;&#x5E76;&#x6CA1;&#x6709;&#x7528; overlayfs&#xFF0C;&#x53EF;&#x80FD;&#x662F;&#x5185;&#x6838;&#x7248;&#x672C;&#x592A;&#x65E7;&#x4E0D;&#x652F;&#x6301; overlayfs &#x7684;&#x7F18;&#x6545;&#xFF0C;&#x8FD9;&#x91CC;&#x53EF;&#x4EE5;&#x5728; /data &#x76EE;&#x5F55;&#x4E0B;&#x521B;&#x5EFA;&#x6587;&#x4EF6;&#x5939;&#xFF0C;&#x4F8B;&#x5982;&#x7528; <code>mount --bind /data/root /root</code> &#x628A; /root &#x76EE;&#x5F55;&#x7ED1;&#x5B9A;&#x5230; /data/root &#x4E0B;&#x3002;&#x5173;&#x4E8E; openwrt &#x8F6F;&#x4EF6;&#x6E90;&#x517C;&#x5BB9;&#x6027;&#x8FD9;&#x4E2A;&#xFF0C;15.05.1&#x8FD9;&#x4E2A;&#x7248;&#x672C;&#x540E;&#xFF0C;libc &#x548C; gcc &#x7248;&#x672C;&#x90FD;&#x53D1;&#x751F;&#x53D8;&#x5316;&#xFF0C;ABI&#x5F88;&#x53EF;&#x80FD;&#x5DF2;&#x7ECF;&#x4E0D;&#x517C;&#x5BB9;&#xFF0C;&#x7F16;&#x8BD1;&#x540E;&#x7684;&#x4E8C;&#x8FDB;&#x5236;&#x6CA1;&#x6CD5;&#x5728;&#x5B98;&#x65B9;&#x56FA;&#x4EF6;&#x8FD0;&#x884C;&#x3002;&#x8981;&#x4F7F;&#x7528;&#x6700;&#x65B0;&#x7684;&#x8F6F;&#x4EF6;&#x6700;&#x4FDD;&#x9669;&#x7684;&#x662F;&#x5237;&#x7B2C;&#x4E09;&#x65B9;&#x56FA;&#x4EF6;&#xFF0C;&#x4E0B;&#x9762;&#x7684;&#x94FE;&#x63A5;&#x90FD;&#x4F1A;&#x6BD4;&#x8F83;&#x6709;&#x5E2E;&#x52A9;&#x3002;</p>
+<ul>
+<li>&#x63A8;&#x8350;&#x9605;&#x8BFB;&#xFF1A;</li>
+</ul>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://openwrt.org/toh/xiaomi/mir3">OpenWrt Project: Xiaomi Mi WiFi R3 (Mi Wifi Router 3 / MIR3 / MI3)</a></li>
+<li><a target="_blank" rel="noopener" href="https://openwrt.org/docs/guide-user/additional-software/extroot_configuration">OpenWrt Project: Extroot configuration</a></li>
+<li><a target="_blank" rel="noopener" href="https://openwrt.org/zh-cn/doc/uci/fstab">OpenWrt Project: Fstab&#x914D;&#x7F6E;</a></li>
+<li><a target="_blank" rel="noopener" href="https://openwrt.org/zh/docs/techref/opkg">OpenWrt Project: OPKG &#x8F6F;&#x4EF6;&#x5305;&#x7BA1;&#x7406;</a></li>
+</ol>
+
+  </div>
+  
+  <footer class="article-footer">
+    
+      <ul class="list-none flex flex-wrap justify-end">
+        <li class="pl-2">
+            <a class="text-sm text-accent hover:underline" href="/tags/openwrt/">#openwrt</a>
+          </li><li class="pl-2">
+            <a class="text-sm text-accent hover:underline" href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/">#&#x8DEF;&#x7531;&#x5668;</a>
+          </li>
+      </ul>
+      <meta itemprop="keywords" content=",">
+    
+  </footer>
+  <meta itemprop="datePublished" content="2020-07-02T12:03:06.000Z">
+  <meta itemprop="dateModified" content="2022-03-26T20:42:57.386Z">
+  <div itemprop="author publisher" itemscope itemtype="https://schema.org/Person">
+    <meta itemprop="name" content="Andy Deng">
+  </div>
+</article>
+
+</main>
+
+
+</div><div class="flex-shrink-0"><footer class="py-12 text-center">
+  &#xA9; 2022 Andy Deng<br>
+  Powered by <a class="hover:text-accent hover:underline" href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>
+</footer>
+</div></div></body></html>

@@ -1,0 +1,108 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
+
+<!-- Prefetch -->
+<link rel="preconnect" href="https://fonts.googleapis.com/" crossorigin>
+<link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net/">
+
+<!-- Meta -->
+<title>&#x5728; VMware &#x4E2D;&#x8FD0;&#x884C;&#x7269;&#x7406;&#x673A;&#x7684; Linux&#xFF0C;&#x591A;&#x542F;&#x52A8;&#x7684;&#x4E00;&#x6B21;&#x5C1D;&#x8BD5; | Memory-copy</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Google fonts -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&amp;display=swap&amp;text=Memory-copy0123456789">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inconsolata&amp;display=swap">
+<link rel="shortcut icon" href="/assets/favicon.ico"><link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png"><link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48x48.png"><link rel="manifest" href="/assets/manifest.json"><meta name="mobile-web-app-capable" content="yes"><meta name="theme-color" content="#7f9cf5"><meta name="application-name" content="Memory-copy"><link rel="apple-touch-icon" sizes="57x57" href="/assets/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="/assets/apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="/assets/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="/assets/apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="/assets/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="/assets/apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="/assets/apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="/assets/apple-touch-icon-152x152.png"><link rel="apple-touch-icon" sizes="167x167" href="/assets/apple-touch-icon-167x167.png"><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon-180x180.png"><link rel="apple-touch-icon" sizes="1024x1024" href="/assets/apple-touch-icon-1024x1024.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Memory-copy"><meta name="msapplication-TileColor" content="#1a202c"><meta name="msapplication-TileImage" content="/assets/mstile-144x144.png"><meta name="msapplication-config" content="/assets/browserconfig.xml"><script defer="defer" src="/build/runtime.4f81b965ee044866d74b.js"></script><script defer="defer" src="/build/app.c495528d022cb4af101d.js"></script><link href="/build/app.c495528d022cb4af101d.css" rel="stylesheet"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Memory-copy" type="application/atom+xml">
+</head><body class="bg-background text-content antialiased scrollbar-dark"><div class="container max-w-3xl mx-auto px-4 flex flex-col min-h-screen"><div class="flex-grow">
+<header>
+  <nav class="flex py-4 justify-end items-center">
+    <a class="ml-5 text-content text-opacity-75 hover:text-accent" href="/about/">About</a><a class="ml-5 text-content text-opacity-75 hover:text-accent" href="/archives/">Archives</a>
+    <div class="w-2"></div>
+    
+      <a class="header-icon-btn rss" title="RSS" href="/atom.xml"></a>
+    
+      <a class="header-icon-btn github" title="GitHub" target="_blank" rel="noopener" href="https://github.com/andytimes"></a>
+    
+  </nav>
+  <h1 class="flex-shrink-0 font-logo text-white text-5xl leading-none text-right pb-12">
+    <a href="/">Memory-copy</a>
+  </h1>
+</header>
+ <main>
+  
+
+<article id="post-physical-linux-os-runs-in-vmware" class="article-container" itemscope itemtype="https://schema.org/Article">
+  <header class="article-header">
+    <div class="text-accent leading-none pb-2 text-sm">May 2, 2021</div>
+    <h1 class="text-2xl lg:text-3xl font-light leading-tight pt-2" itemprop="headline">
+      <a class="block hover:text-accent" href="/blog/2021/05/02/physical-linux-os-runs-in-vmware/">&#x5728; VMware &#x4E2D;&#x8FD0;&#x884C;&#x7269;&#x7406;&#x673A;&#x7684; Linux&#xFF0C;&#x591A;&#x542F;&#x52A8;&#x7684;&#x4E00;&#x6B21;&#x5C1D;&#x8BD5;</a>
+    </h1>
+  </header>
+  <div class="article-body" itemprop="articleBody">
+    <p>&#x6700;&#x8FD1;&#x5F00;&#x53D1;&#x591A;&#x5728; Windows &#x4E0A;&#x8FDB;&#x884C;&#xFF0C;&#x786C;&#x76D8;&#x4E0A;&#x7684;&#x53E6;&#x4E00;&#x4E2A;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF; Fedora &#x5C31;&#x5F88;&#x4E45;&#x6CA1;&#x542F;&#x52A8;&#x8FC7;&#x4E86;&#x3002;&#x4F46;&#x6709;&#x65F6;&#x53C8;&#x96BE;&#x514D;&#x8981;&#x7528;&#x5230; Fedora &#x91CC;&#x9762;&#x81EA;&#x884C;&#x7F16;&#x8BD1;&#x7684;&#x7A0B;&#x5E8F;&#x548C;&#x5B9A;&#x5236;&#x7684;&#x811A;&#x672C;&#xFF0C;&#x5173;&#x673A;&#x8FDB;&#x5230; Fedora &#x91CC;&#x8DD1;&#x4E00;&#x904D;&#x663E;&#x5F97;&#x8FC7;&#x4E8E;&#x9EBB;&#x70E6;&#x3002;&#x6070;&#x597D;&#x90A3;&#x65F6;&#x542C;&#x5230;&#x57FA;&#x53CB;&#x7528; HyperV &#x628A;&#x81EA;&#x5DF1;&#x7684; ArchLinux &#x505A;&#x6210;&#x4E86;&#x591A;&#x542F;&#x52A8;&#xFF0C;&#x65E2;&#x53EF;&#x4EE5;&#x5728;&#x9700;&#x8981; GPU &#x7684;&#x65F6;&#x5019;&#x8FDB;&#x5165;&#x771F;&#x673A;&#xFF0C;&#x53C8;&#x53EF;&#x4EE5;&#x5728;&#x522B;&#x7684;&#x573A;&#x666F;&#x4E0B;&#x4ECE; Windows &#x73AF;&#x5883;&#x64CD;&#x4F5C; HyperV &#x542F;&#x52A8;&#x7684; ArchLinux&#xFF0C;&#x8FD9;&#x6837;&#x53EF;&#x4EE5;&#x5B8C;&#x7F8E;&#x89E3;&#x51B3;&#x4EE5;&#x4E0A;&#x7684;&#x95EE;&#x9898;&#x3002;</p>
+<span id="more"></span>
+<p>&#x4F46;&#x662F;&#xFF0C;&#x9274;&#x4E8E;&#x5FAE;&#x8F6F;&#x7684; HyperV &#x6CA1;&#x6709;&#x5BF9; Linux &#x63D0;&#x4F9B;&#x826F;&#x597D;&#x7684;&#x56FE;&#x5F62;&#x9A71;&#x52A8;&#x652F;&#x6301;&#xFF0C;&#x52A0;&#x4E0A;&#x8FD8;&#x6709;&#x5404;&#x79CD;&#x5947;&#x8469;&#x95EE;&#x9898;&#x5B58;&#x5728;&#xFF08;&#x770B; Windows &#x81EA;&#x8EAB;&#x7684;&#x72B6;&#x51B5;&#x5C31;&#x53EF;&#x77E5;&#x2026;&#xFF09;&#xFF0C;&#x6211;&#x600E;&#x4E48;&#x53EF;&#x80FD;&#x7528; HyperV &#x5462;&#x3002;&#x7F51;&#x4E0A;&#x641C;&#x7D22;&#x4E00;&#x756A;&#x5FC3;&#x76EE;&#x4E2D; Windows &#x6700;&#x5F3A;&#x8F6F;&#x4EF6; VMware &#x7684;&#x591A;&#x542F;&#x52A8;&#x6848;&#x4F8B;&#x4E4B;&#x540E;&#xFF0C;&#x53D1;&#x73B0;&#x5B83;&#x679C;&#x7136;&#x53EF;&#x4EE5;&#x505A;&#x5230;&#x591A;&#x542F;&#x52A8;&#xFF0C;&#x4E4B;&#x524D;&#x6CA1;&#x6709;&#x7528;&#x597D;&#x8FD9;&#x4E2A;&#x529F;&#x80FD;&#x786E;&#x5B9E;&#x662F;&#x60ED;&#x6127;&#x3002;V2EX &#x4E00;&#x4F4D;&#x5927;&#x795E;&#x5728;<a target="_blank" rel="noopener" href="https://v2ex.com/t/636570">&#x4E00;&#x7BC7;&#x4E3B;&#x9898;-3&#x697C;</a>&#x4E0B;&#x63D0;&#x4F9B;&#x4E86;&#x8FD9;&#x6837;&#x7684;&#x601D;&#x8DEF;&#xFF1A;&#x5728; VMware &#x4E2D;&#x521B;&#x5EFA;&#x597D;&#x5F15;&#x5BFC;&#x5206;&#x533A;&#xFF08;efi &#x548C; boot&#xFF09;&#xFF0C;&#x7528;&#x5206;&#x533A;Label&#x7684;&#x65B9;&#x5F0F;&#x5F15;&#x5BFC;&#x7269;&#x7406;&#x673A;&#x4E0A; Linux &#x6240;&#x5728;&#x5206;&#x533A;&#x7684;&#x7CFB;&#x7EDF;&#x5373;&#x53EF;&#x3002;&#x8FD9;&#x7ED9;&#x6211;&#x5E26;&#x6765;&#x4E86;&#x5F88;&#x5927;&#x7684;&#x542F;&#x53D1;&#x3002;&#x53C8;&#x5F97;&#x76CA;&#x4E8E; VMware &#x628A; Linux &#x4E0B;&#x7528;&#x4E8E;&#x589E;&#x5F3A;&#x865A;&#x62DF;&#x673A;&#x4F53;&#x9A8C;&#x7684; VMware Tools&#xFF08;&#x7528;&#x4E8E;&#x81EA;&#x7531;&#x7F29;&#x653E;&#xFF0C;&#x56FE;&#x5F62;&#x9A71;&#x52A8;&#xFF0C;&#x526A;&#x8D34;&#x677F;&#x5171;&#x4EAB;&#x7B49;&#xFF09;&#x5F00;&#x6E90;&#x4E3A; <a target="_blank" rel="noopener" href="https://github.com/vmware/open-vm-tools">open-vm-tools</a> &#x9879;&#x76EE;&#xFF0C;&#x591A;&#x6570; Linux &#x53D1;&#x884C;&#x7248;&#x5DF2;&#x7ECF;&#x9884;&#x88C5;&#x4E86;&#x76F8;&#x5173;&#x8F6F;&#x4EF6;&#x5305;&#xFF08;&#x6CA1;&#x6709;&#x5728;&#x5305;&#x7BA1;&#x7406;&#x4E2D;&#x81EA;&#x884C;&#x5B89;&#x88C5;&#x5373;&#x53EF;&#xFF09;&#xFF0C;&#x6240;&#x4EE5;&#x865A;&#x62DF;&#x5316;&#x540E;&#x7684;&#x4F53;&#x9A8C;&#x5F88;&#x597D;&#x3002;</p>
+<p>&#x6574;&#x4E2A;&#x865A;&#x62DF;&#x5316;&#x7684;&#x6D41;&#x7A0B;&#x5F88;&#x7B80;&#x5355;&#xFF1A;</p>
+<ol>
+<li>&#x51C6;&#x5907;&#x597D;&#x548C;&#x7269;&#x7406;&#x673A; Linux &#x5C3D;&#x91CF;&#x4E00;&#x81F4; LiveCD&#xFF0C;&#x5728; VMware &#x4E2D;&#x7528; &#x201C;&#x81EA;&#x5B9A;&#x4E49;(&#x9AD8;&#x7EA7;)&#x201D; &#x9009;&#x9879;&#x65B0;&#x5EFA;&#x865A;&#x62DF;&#x673A;</li>
+<li>&#x65B0;&#x5EFA;&#x7684;&#x865A;&#x62DF;&#x673A;&#x91CD;&#x70B9;&#x662F;&#x4E24;&#x5757;&#x78C1;&#x76D8;&#xFF1A;<br>
+a. &#x65B0;&#x5EFA;&#x4E00;&#x5757;&#x865A;&#x62DF;&#x78C1;&#x76D8;&#x7528;&#x4E8E;&#x5EFA;&#x7ACB; EFI &#xFF08;&#x9ED8;&#x8BA4;&#x4E3A; BIOS &#x542F;&#x52A8;&#xFF0C;&#x5728;&#x521B;&#x5EFA;&#x865A;&#x62DF;&#x673A;&#x540E;&#xFF0C;&#x4FEE;&#x6539;&#x865A;&#x62DF;&#x673A;&#x7684;&#x56FA;&#x4EF6;&#x7C7B;&#x578B;&#x4E3A; UEFI&#xFF09;&#x548C; boot &#x5206;&#x533A;<br>
+b. &#x5C06;&#x7269;&#x7406;&#x78C1;&#x76D8;&#x7684;&#x6839;&#x5206;&#x533A;&#x8FDE;&#x63A5;&#x5230;&#x865A;&#x62DF;&#x673A;</li>
+<li>&#x7528; LiveCD &#x5EFA;&#x7ACB;&#x597D; efi &#x548C; boot &#x5206;&#x533A;&#xFF08;&#x9700;&#x8981;&#x638C;&#x63E1; chroot &#x548C; UEFI&#x73AF;&#x5883;&#x5B89;&#x88C5; grub&#xFF09;</li>
+<li>&#x6539;&#x5199; fstab&#xFF0C;&#x7528; Label &#x65B9;&#x5F0F;&#x5F15;&#x5BFC;&#x7CFB;&#x7EDF;&#xFF0C;&#x6211;&#x4F1A;&#x628A;&#x81EA;&#x5DF1;&#x7684; fstab &#x653E;&#x5728;&#x6587;&#x672B;&#x4F9B;&#x53C2;&#x8003;</li>
+</ol>
+<p>&#x7531;&#x4E8E;&#x6211;&#x7684;&#x7269;&#x7406;&#x673A;&#x6CA1;&#x6709;&#x5C06; boot &#x5206;&#x533A;&#x72EC;&#x7ACB;&#xFF0C;&#x65B0;&#x589E;&#x8FDB; fstab &#x5F15;&#x5BFC; VMware boot &#x5206;&#x533A;&#x7684;&#x6761;&#x76EE;&#xFF0C;&#x4F1A;&#x5BFC;&#x81F4;&#x771F;&#x673A;&#x542F;&#x52A8;&#x5931;&#x8D25;&#xFF0C;&#x9700;&#x8981;&#x52A0;&#x4E0A;&#x8D85;&#x65F6;&#x53C2;&#x6570; x-systemd.device-timeout=3s &#xFF08;3&#x79D2;&#x540E;&#x8D85;&#x65F6;&#xFF09;&#x5728;&#x771F;&#x673A;&#x542F;&#x52A8;&#x65F6;&#x8DF3;&#x8FC7;&#x72EC;&#x7ACB;&#x7684; boot &#x5206;&#x533A;&#x3002;&#x7531;&#x6B64;&#xFF0C;&#x865A;&#x62DF;&#x5316;&#x597D;&#x4E86;&#x7684; Linux &#x8FD0;&#x884C;&#x8D77;&#x6765;&#xFF0C;&#x65E2;&#x53EF;&#x4EE5;&#x4EAB;&#x53D7;&#x5230; Linux &#x7684;&#x9AD8;&#x6548;&#x7B80;&#x6D01;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x540C;&#x65F6;&#x4EAB;&#x53D7; Windows &#x4E0A;&#x7684;<s>&#x5F71;&#x97F3;&#x5A31;&#x4E50;</s>&#x987A;&#x7545;&#x5F00;&#x53D1;&#x3002;</p>
+<img src="/blog/2021/05/02/physical-linux-os-runs-in-vmware/fedora32_on_vmware.png" class>
+<p>&#x9644;&#xFF1A;</p>
+<ul>
+<li>/etc/fstab</li>
+</ul>
+<pre><code class="language-shell">#
+# /etc/fstab
+# Created by anaconda on Fri Oct  2 12:04:56 2015
+#
+# Accessible filesystems, by reference, are maintained under &apos;/dev/disk&apos;
+# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info
+#
+
+# UEFI partation
+LABEL=EFI	/boot/efi	vfat	noatime	0	0
+
+# VMware boot partation
+LABEL=fedora-boot	/boot	ext4	noatime,x-systemd.device-timeout=1s 0	0
+
+LABEL=fedora /	ext4	noatime,errors=remount-ro,discard	0	1
+#/swapfile	none	swap	sw	0	0
+tmpfs	/tmp	tmpfs	size=4G,nosuid,noatime	0	0
+</code></pre>
+
+  </div>
+  
+  <footer class="article-footer">
+    
+      <ul class="list-none flex flex-wrap justify-end">
+        <li class="pl-2">
+            <a class="text-sm text-accent hover:underline" href="/tags/VMware/">#VMware</a>
+          </li><li class="pl-2">
+            <a class="text-sm text-accent hover:underline" href="/tags/Virtualization/">#Virtualization</a>
+          </li>
+      </ul>
+      <meta itemprop="keywords" content=",">
+    
+  </footer>
+  <meta itemprop="datePublished" content="2021-05-02T15:17:21.000Z">
+  <meta itemprop="dateModified" content="2022-03-26T20:42:57.386Z">
+  <div itemprop="author publisher" itemscope itemtype="https://schema.org/Person">
+    <meta itemprop="name" content="Andy Deng">
+  </div>
+</article>
+
+</main>
+
+
+</div><div class="flex-shrink-0"><footer class="py-12 text-center">
+  &#xA9; 2022 Andy Deng<br>
+  Powered by <a class="hover:text-accent hover:underline" href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>
+</footer>
+</div></div></body></html>
